@@ -15,8 +15,8 @@ targetx1 = 200
 targety1 = 20
 targetx2 = 280
 targety2 = 80
-target = drawpad.create_rectangle(targetx1,targety1,targetx2,targety2, fill="blue")
-player = drawpad.create_rectangle(240,240,260,260, fill="pink")
+target = drawpad.create_rectangle(targetx1,targety1,targetx2,targety2, fill="red")
+player = drawpad.create_rectangle(240,240,260,260, fill="orange")
 
 
 
@@ -29,11 +29,10 @@ class MyApp:
 		self.myContainer1.pack()
 		
 		self.button1 = Button(self.myContainer1)
-		self.button1.configure(text="Up", background= "green")
-		self.button1.grid(row=0,column=0)
-					
-		# "Bind" an action to the first button												
+		self.button1.configure(text="Up", background= "purple")
+		self.button1.grid(row=0,column=0)			
 		self.button1.bind("<Button-1>", self.button1Click)
+		# "Bind" an action to the first button												
 
 		  
 		# This creates the drawpad - no need to change this 
@@ -47,8 +46,12 @@ class MyApp:
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
 		global targetx1, targety1, targetx2, targety2
-
-
+                drawpad.move(player,0,-20)
+                
+                if (x1 >= targetx1 and x2 <= targetx2) and (y1 >= targety1 and y2 <= targety2):
+                    drawpad.itemconfig(target,fill= "pink")
+                else:
+                    drawpad.itemconfig(target,fill= "red")
 		# Ensure that we are doing our collision detection
 		# After we move our object!
 	
